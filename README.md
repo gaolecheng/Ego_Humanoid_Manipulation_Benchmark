@@ -13,7 +13,8 @@ Ruihan Yang<sup>1*</sup>, Qinxi Yu<sup>2*</sup>, Yecheng Wu<sup>3,4</sup>, Rui Y
 For training code and eval code, follow: https://github.com/RchalYang/EgoVLA_Release
 
 ## Getting Started
-
+### Notice!
+We are using IsaacLab version 1.2.0 and IsaacSim 4.2.0 for EgoVLA data collection and evaluation. As we observe large change of physics behaviours in later IsaacLab & IsaacSim version, please consider downgrade versions to reproduce results.
 ### Installation
 1. **Install IsaacLab**  
    Follow the [IsaacLab Local Installation Guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
@@ -94,6 +95,3 @@ For the details of randomization implementation, check each the `_reset_idx()` i
 
 ---
 
----
-### Notice!
-We are using IsaacLab version 1.2.0 and IsaacSim 4.2.0 for EgoVLA data collection and evaluation. As we observe large change of physics behaviours in later IsaacLab & IsaacSim version, please consider downgrade versions to reproduce results.
