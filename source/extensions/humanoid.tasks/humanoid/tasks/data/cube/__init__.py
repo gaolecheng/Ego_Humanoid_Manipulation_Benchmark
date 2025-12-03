@@ -1,1 +1,0 @@
-from .cube import CUBE_CFG

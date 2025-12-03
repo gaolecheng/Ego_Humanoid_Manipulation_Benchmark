@@ -1,1 +1,0 @@
-from .mug import MUG_CFG
