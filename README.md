@@ -25,18 +25,14 @@ We are using IsaacLab version 1.2.0 and IsaacSim 4.2.0 for EgoVLA data collectio
    !!Note: If you don't have git lfs install (required for downloading assets), run
    ```sh
    git lfs install
-   ``` 
+   ```
+   !!Note: Since we are hosting LFS files on hugging face repo as a submodule, you might need to [set up authentication with your hugging face account](https://huggingface.co/docs/hub/en/security-git-ssh).
+   
    Clone repo & assets:
    ```sh
    git clone --recurse-submodules https://github.com/quincy-u/Ego_Humanoid_Manipulation_Benchmark.git
    ```
-   Or
-   ```sh
-   git clone https://github.com/quincy-u/Ego_Humanoid_Manipulation_Benchmark.git
-   cd Ego_Humanoid_Manipulation_Benchmark
-   git submodule update --init --recursive
-   ```
-   
+
 4. **Install the Humanoid Tasks Extension**  
    ```sh
    cd Ego_Humanoid_Manipulation_Benchmark && ${IsaacLab_PATH}/isaaclab.sh -p -m pip install -e source/extensions/humanoid.tasks
