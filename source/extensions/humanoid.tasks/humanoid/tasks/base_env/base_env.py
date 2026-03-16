@@ -7,6 +7,10 @@ from humanoid.tasks.data.h1 import (H1_INSPIRE_CFG, H1_INSPIRE_LEFT_ARM_CFG, H1_
                                     H1_INSPIRE_RIGHT_ARM_CFG, H1_INSPIRE_RIGHT_HAND_CFG)
 from humanoid.tasks.data.scene import ROOM_CFG
 from humanoid.tasks.data.table import TABLE_CFG
+
+# 1.原作者缺了定义，补上，防止报错。
+from omni.isaac.lab.sim import PhysxCfg
+
 from omni.isaac.lab.sensors.contact_sensor.contact_sensor import ContactSensor
 from omni.isaac.lab.sensors.contact_sensor.contact_sensor_cfg import ContactSensorCfg
 from omni.isaac.lab.assets.articulation.articulation import Articulation

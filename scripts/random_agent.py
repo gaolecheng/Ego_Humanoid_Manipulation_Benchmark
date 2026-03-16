@@ -3,8 +3,10 @@
 
 import importlib
 import sys
-if "omni.isaac.lab" not in sys.modules:
-    sys.modules["omni.isaac.lab"] = importlib.import_module("isaaclab")
+
+# 1.因为没有新版本的isaaclab，所以暂时注释掉了下面的代码，否则会报错说找不到isaaclab
+# if "omni.isaac.lab" not in sys.modules:
+#     sys.modules["omni.isaac.lab"] = importlib.import_module("isaaclab")
     
 import argparse
 from omni.isaac.lab.app import AppLauncher
@@ -23,9 +25,11 @@ simulation_app = app_launcher.app
 import gymnasium as gym
 import torch
 
-if "omni.isaac.lab_tasks" not in sys.modules:
-    sys.modules["omni.isaac.lab"] = importlib.import_module("isaaclab")
-    sys.modules["omni.isaac.lab_tasks"] = importlib.import_module("isaaclab_tasks")
+# 2.因为没有新版本的isaaclab，所以暂时注释掉了下面的代码，否则会报错说找不到isaaclab
+# if "omni.isaac.lab_tasks" not in sys.modules:
+#     sys.modules["omni.isaac.lab"] = importlib.import_module("isaaclab")
+#     sys.modules["omni.isaac.lab_tasks"] = importlib.import_module("isaaclab_tasks")
+
 import omni.isaac.lab_tasks  # noqa: F401
 import humanoid.tasks
 from omni.isaac.lab_tasks.utils import parse_env_cfg
