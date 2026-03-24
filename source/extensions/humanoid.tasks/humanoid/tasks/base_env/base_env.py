@@ -65,7 +65,7 @@ class BaseEnvCfg(DirectRLEnvCfg):
     room = ROOM_CFG.replace(prim_path="/World/envs/env_.*/Room")  # type: ignore
     # camera
     left_eye_camera = CameraCfg(
-        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/Torso_Link/left_eye_camera",
+        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/Torso_Link/left_eye_camera",
         height=360,
         width=640,
         data_types=["rgb", "distance_to_image_plane"],
@@ -75,7 +75,7 @@ class BaseEnvCfg(DirectRLEnvCfg):
         offset=CameraCfg.OffsetCfg(pos=(0.09, 0.033, 0.65), rot=(0.66446, 0.24184, -0.24184, -0.664464), convention="opengl"),
     )
     right_eye_camera = CameraCfg(
-        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/Torso_Link/right_eye_camera",
+        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/Torso_Link/right_eye_camera",
         height=360,
         width=640,
         data_types=["rgb", "distance_to_image_plane"],
@@ -95,7 +95,7 @@ class BaseEnvCfg(DirectRLEnvCfg):
         offset=CameraCfg.OffsetCfg(pos=(0.09, 0.0, 1.7),rot=(0.66446, 0.24184, -0.24184, -0.664464),convention="opengl",),
     )
     left_hand_camera = CameraCfg(
-        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/left_arm_link7/left_hand_camera",
+        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/left_arm_link7/left_hand_camera",
         height=720,
         width=1280,
         data_types=["rgb", "distance_to_image_plane"],
@@ -105,7 +105,7 @@ class BaseEnvCfg(DirectRLEnvCfg):
         offset=CameraCfg.OffsetCfg(pos=(-0.1, 0.04, 0.0), rot=(-0.17705, -0.17705, 0.68458, 0.68458), convention="opengl"),
     )
     right_hand_camera = CameraCfg(
-        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/right_arm_link7/right_hand_camera",
+        prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/right_arm_link7/right_hand_camera",
         height=720,
         width=1280,
         data_types=["rgb", "distance_to_image_plane"],
@@ -115,8 +115,8 @@ class BaseEnvCfg(DirectRLEnvCfg):
         offset=CameraCfg.OffsetCfg(pos=(-0.1, 0.04, 0.0), rot=(0.68458, -0.68458, -0.17705, 0.17705), convention="opengl"),
     )
     # contact sensors
-    left_hand_contact_sensor = ContactSensorCfg(prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/left_arm_rightfinger")
-    right_hand_contact_sensor = ContactSensorCfg(prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting/right_arm_leftfinger")
+    left_hand_contact_sensor = ContactSensorCfg(prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/left_arm_rightfinger")
+    right_hand_contact_sensor = ContactSensorCfg(prim_path="/World/envs/env_.*/Robot/minder1_tilted_mounting_physics/right_arm_leftfinger")
     # env
     episode_length_s = 0.5
     decimation = 4
