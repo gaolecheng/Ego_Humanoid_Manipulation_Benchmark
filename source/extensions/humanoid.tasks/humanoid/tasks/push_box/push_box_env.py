@@ -64,12 +64,15 @@ class PushBoxEnv(BaseEnv):
         return time_out, time_out
 
     def _reset_idx(self, env_ids: Sequence[int] | None):
+        if env_ids is None:
+            env_ids = self.robot._ALL_INDICES  # type: ignore[attr-defined]
         super()._reset_idx(env_ids)
         box_root_state = self.box.data.default_root_state[env_ids, :]
+        # Always refresh goal position so fixed-scene teleop/eval has valid success target.
+        self._reset_goal_pos(env_ids, randomize_goal=bool(self.cfg.randomize))
         if self.cfg.randomize:
-            self._reset_goal_pos(env_ids)
             if self.cfg.randomize_idx < 0:
-                box_root_state[:, 0:2] += (self.cfg.randomize_range * 0.2) * torch.rand((self.num_envs, 2), device=self.device) - (0.1 * self.cfg.randomize_range) 
+                box_root_state[:, 0:2] += (self.cfg.randomize_range * 0.2) * torch.rand((len(env_ids), 2), device=self.device) - (0.1 * self.cfg.randomize_range)
             else:
                 column_idx = self.cfg.randomize_idx // 100
                 row_idx = self.cfg.randomize_idx % 100
@@ -79,15 +82,18 @@ class PushBoxEnv(BaseEnv):
         self.box.write_root_state_to_sim(box_root_state, env_ids=env_ids)
         self.reach_success[env_ids] = 0
         
-    def _reset_goal_pos(self, env_ids):
-        if self.cfg.randomize_idx < 0:
-            offset_x = sample_uniform(-0.03, 0.03, (len(env_ids)), device=self.device)
-            offset_y = sample_uniform(-0.1, 0.1, (len(env_ids)), device=self.device)
-        else:
+    def _reset_goal_pos(self, env_ids, randomize_goal: bool = True):
+        if randomize_goal and self.cfg.randomize_idx < 0:
+            offset_x = sample_uniform(-0.03, 0.03, (len(env_ids),), device=self.device)
+            offset_y = sample_uniform(-0.1, 0.1, (len(env_ids),), device=self.device)
+        elif randomize_goal:
             column_idx = (9999 - self.cfg.randomize_idx) // 100
             row_idx = (9999 - self.cfg.randomize_idx) % 100
-            offset_x = 0.03 - (0.06 / 99) * row_idx
-            offset_y = 0.1 - (0.2 / 99) * column_idx
+            offset_x = torch.full((len(env_ids),), 0.03 - (0.06 / 99) * row_idx, device=self.device)
+            offset_y = torch.full((len(env_ids),), 0.1 - (0.2 / 99) * column_idx, device=self.device)
+        else:
+            offset_x = torch.zeros((len(env_ids),), device=self.device)
+            offset_y = torch.zeros((len(env_ids),), device=self.device)
         self.goal_pos_w[env_ids, :] = torch.tensor(self.cfg.goal_default_pos, device=self.device) + self.scene.env_origins[env_ids]
         self.goal_pos_w[env_ids, 0] += offset_x
         self.goal_pos_w[env_ids, 1] += offset_y 
